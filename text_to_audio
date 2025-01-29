@@ -1,0 +1,8 @@
+from gtts import gTTS
+
+def generate_audio_alert(message, filename="alert.mp3"):
+    tts = gTTS(message)
+    tts.save(filename)
+    print(f"Audio alert saved as {filename}")
+
+generate_audio_alert("Please move to higher ground immediately.")
