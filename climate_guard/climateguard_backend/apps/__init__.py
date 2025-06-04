@@ -1,0 +1,3 @@
+"""
+ClimateGuard Django Apps Package
+""" 
