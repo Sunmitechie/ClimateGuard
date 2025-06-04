@@ -1,0 +1,18 @@
+@app.route("/weather/coordinates", methods=["GET"])
+def get_weather_by_coordinates():
+    lat = request.args.get("lat")
+    lon = request.args.get("lon")
+    if not lat or not lon:
+        return jsonify({"error": "Latitude and Longitude required"}), 400
+
+    params = {"lat": lat, "lon": lon, "appid": API_KEY, "units": "metric"}
+    response = requests.get(BASE_URL, params=params)
+    if response.status_code != 200:
+        return jsonify({"error": "Failed to fetch weather data"}), response.status_code
+
+    data = response.json()
+    return jsonify({
+        "temperature": data["main"]["temp"],
+        "humidity": data["main"]["humidity"],
+        "description": data["weather"][0]["description"]
+    })
